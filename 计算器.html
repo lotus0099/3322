@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		.box{
+			width:300px;
+			height:440px;
+			margin:10px auto;
+		}
+		.cf:before,
+		.cf:after{
+			display:table;
+			content:"";
+		}
+		.cf:after{
+			clear:both;
+		}
+		input{
+			border:none;
+		}
+		.wrap{
+			width:300px;
+			height:440px;
+			padding:10px;
+			border:1px solid #000;
+			box-sizing: border-box;
+		}
+		#text{
+			width:280px;
+			height:50px;
+			line-height:30px;
+			font-size: 30px;
+			box-sizing: border-box;
+			border:1px solid #000;
+		}
+		.clear{
+			float:right;
+			width:50px;
+			height:30px;
+			line-height:30px;
+			text-align:center;
+			box-sizing: border-box;
+			border:1px solid #000000;
+			background:linear-gradient(to bottom, #fff 20%, #aaa 25%);
+			margin:15px 8px 0 0 ;
+		}
+		.item{
+			width:270px;
+			height:50px;
+			float:left;
+			margin-top:24px;
+		
+			padding-left:3px;
+		}
+		.item span{
+			display: block;
+			float:left;
+			width:50px;
+			height:50px;
+			line-height:50px;
+			text-align:center;
+			box-sizing: border-box;
+			border:1px solid #000000;
+			background:linear-gradient(to bottom, #fff 20%, #aaa 25%);
+		}
+		.item span +span{
+			margin-left:23px;
+		}
+	</style>
+</head>
+<body>
+	 <div class="box">
+		 <div class="wrap ">
+			 <input type="text" id="text">
+			 <div class="cf">
+				 <p class=" clear" id="clear">C</p>
+			 </div>
+			 <div class="item">
+				 <span>1</span>
+				 <span>2</span>
+				 <span>3</span>
+				 <span class="tool">+</span>
+			 </div>
+			 <div class="item">
+				 <span>4</span>
+				 <span>5</span>
+				 <span>6</span>
+				 <span class="tool">-</span>
+			 </div>
+			 <div class="item">
+				 <span>7</span>
+				 <span>8</span>
+				 <span>9</span>
+				 <span class="tool">*</span>
+			 </div>
+			 <div class="item">
+				 <span>0</span>
+				 <span>.</span>
+				 <span class="tool ">=</span>
+				 <span class="tool">/</span>
+			 </div>
+		 </div>
+	 </div>
+	 <script>
+		 var oText = document.getElementById("text");
+		 var oClear = document.getElementById("clear");
+		 var oSpan = document.getElementsByTagName("span");
+		 var sVal = document.getElementsByClassName("tools");
+		 var show = "";
+		 var lfVal = "";
+		 var rgVal = "";
+		 var sVal = [];
+		 var sum = 0;
+		 (function(){
+             for(var i = 0;i<oSpan.length;i++){
+                 oSpan[i].n = i;
+                 oSpan[i].onclick = function(){
+                     show += oSpan[this.n].innerHTML;
+                     if(!isNaN(show)){
+                         lfVal = show;
+                     }else{
+                         if(oSpan[this.n].className != "tool" ) {
+                             rgVal += oSpan[this.n].innerHTML;
+                            
+                         }else{
+                            sVal[0] = oSpan[this.n].innerHTML;
+                           
+                         }
+                     }
+                     oText.value = show;
+                 }
+             }
+		 })();
+		
+		   oSpan[14].onclick=function(){
+		     
+                 switch  (sVal[0]){
+                     case "+":
+                         sum = Number(lfVal)+Number(rgVal);
+                         break;
+                     case "-":
+                         sum = Number(lfVal)-Number(rgVal);
+                         break;
+                     case "*":
+                         sum = Number(lfVal)*Number(rgVal);
+                         break;
+                     case "/":
+                         sum = Number(lfVal)/Number(rgVal);
+                         break;
+                 }
+               oText.value =sum;
+			   show = sum;
+			   lfVal = sum;
+			   rgVal = "";
+			   sVal[0] ="";
+         
+                 
+         }
+         oClear.onclick= function(){
+             oText.value ="";
+             show = "";
+             lfVal = "";
+             rgVal = "";
+             sVal[0] ="";
+         }
+        
+	 </script>
+</body>
+</html>

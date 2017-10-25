@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+           *{  padding:0;
+               margin:0;
+           }
+           li{
+               list-style: none;
+           }
+           a{
+               text-decoration:none;
+           }
+           .banner{
+               position:relative;
+               width:520px;
+               height:280px;
+               margin:100px auto;
+               border:1px solid red;
+               overflow: hidden;
+           }
+           .banner .pic{
+                 width:520px;
+                 height:280px;
+                 margin-left: -520px;
+           }
+           .banner .pic ul{
+               width:800%;
+               height:280px;
+               font-size:0;
+
+           }
+           .pic ul li{
+               width:520px;
+               height:280px;
+               display: inline-block;
+           }
+           .tab{
+               position:absolute;
+               bottom:10px;
+               left:50%;
+               margin-left:-35px;
+               width:80px;
+               height:14px;
+               background:rgba(180,180,180,.6);
+               border-radius:7px;
+           }
+           .tab ul li{
+                float: left;
+                width:10px;
+                height:10px;
+                background:#fff;
+                margin:2px 3px;
+                border-radius: 50%;
+                cursor:pointer;
+           }
+            .tab li.on{
+                background:#f60;
+            }
+            .arrow div{
+                position: absolute;
+                top:50%;
+                width:30px;
+                height:40px;
+                background:rgba(100,100,100,.7);
+                line-height: 40px;
+                text-align: center;
+                font-size: 20px;
+                margin-top:-20px;
+                color:#fff;
+                cursor:pointer;
+            }
+            #prev{
+                left:0;
+            }
+            #next{
+                right:0;
+            }
+    </style>
+</head>
+<body>
+    <div class="banner" id="banner">
+        <div class="pic" id="pic">
+        	<ul>
+            	<li><a href=""><img src="js-天猫轮播作业-img/5.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/1.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/2.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/3.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/4.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/5.jpg"></a></li>
+                <li><a href=""><img src="js-天猫轮播作业-img/1.jpg"></a></li>
+        	</ul>
+        </div>
+        <div class="tab" id="tab">
+        	<ul>
+                <li class="on"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        	</ul>
+        </div>
+        <div class="arrow">
+            <div id="prev">&lt;</div>
+            <div id="next">&gt;</div>
+        </div>
+    </div>
+    <script src="move.js"></script>        
+    <script >
+         var oBanner = document.getElementById("banner");
+         var oPic = document.getElementById("pic");
+         var oTab = document.getElementById("tab");
+         var oLi = oTab.getElementsByTagName("li");
+         var oImg = oPic.getElementsByTagName("img");
+         var oPrev = document.getElementById("prev");
+         var oNext = document.getElementById("next");
+         var n=0;
+         var timer=0;
+         var nowTime=0;
+//         auto();
+         oNext.onclick = function(){
+               if(new Date()-nowTime>300){
+                    nowTime = new Date();
+                    oLi[n].className = "";
+                    n++;
+                    n%=oImg.length-1;
+                    change();
+               }
+         };
+          oPrev.onclick = function(){
+               if(new Date()-nowTime>300){
+                   oLi[n].className = "";
+                   nowTime = new Date();
+                   if(n<0)n=oLi.length-1;
+                      n--;         //这里n-- 必须放到判断条件后,否则n-1后变为-1,-1<0,进入条件n=4,执行到change()函数时候,
+                     // marginLeft:-520*(n+1)+'px' =  marginLeft:-520*(4+1)+'px'  ==-2600px; 无法实现无缝,提前跳至最后了.
+                   change();
+               }
+          };
+          for(var i = 0;i<oLi.length;i++){
+                oLi[i].wangdasui = i;
+                oLi[i].onclick = function(){
+                    oLi[n].className = "";
+                    n = this.wangdasui;
+                   change();
+                }
+          }
+          oBanner.onmouseover = function(){
+              clearInterval(timer);
+          };
+          oBanner.onmouseout = function(){
+              auto();
+          };
+          function auto(){
+             timer = setInterval(function() {
+                 oLi[n].className = "";
+                 n++;
+                 n%=oLi.length;
+                 change();
+             },1000);
+          }
+           function change(){
+                 var now = n;
+                 now %=oLi.length;
+                 if(now<0){
+                  now =  oLi.length-1;
+                 }
+
+                 oLi[now].className = "on";
+                 move(oPic,{marginLeft:-520*(n+1)+'px'},300,function(){
+                   if(n==oLi.length){
+                      this.style.marginLeft='-520px';
+                      n=now;
+                   }else if(n==-1){
+                       this.style.marginLeft=-520*oLi.length+'px';
+                       n=now;
+                   }
+                 });
+           }
+    </script>
+</body>
+</html>

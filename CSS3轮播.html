@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		
+		.slide{
+			width:1000px;
+			height:640px;
+			margin: 200px auto;
+			border:1px solid #f00;
+			overflow:hidden;
+		}
+		.slide ul{
+			position:relative;
+			left:0;
+			top:0;
+			list-style:none;
+			width:120000px;
+			height:640px;
+			-webkit-animation: mov 20s  infinite;
+			-o-animation: mov 20s  infinite;
+			animation: mov 20s  infinite ;
+		}
+		@keyframes mov {
+			0% {
+				left: 0;
+			}
+			10%{
+				left: -1000px;
+			}
+			20%{
+				left: -2000px;
+			}
+			30%{
+				left: -3000px;
+			}
+			40%{
+				left: -4000px;
+			}
+			50%{
+				left: -5000px;
+			}
+	
+		}
+		.slide ul li{
+			width:1000px;
+			height:640px;
+			float: left;
+		}
+		.slide ul:hover {
+			animation-play-state:paused;
+		}
+	
+		.slide ul li:nth-child(1){
+			 background: url("img/bg1.jpg") no-repeat;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(2){
+			 background: url("img/bg2.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(3){
+			 background: url("img/bg3.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(4){
+			 background: url("img/bg4.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(5){
+			 background: url("img/bg5.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(6){
+			 background: url("img/bg1.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		 }
+		.slide ul li:nth-child(7){
+			background: url("img/bg2.jpg") no-repeat;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+		.slide ul li:nth-child(8){
+			background: url("img/bg3.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+		.slide ul li:nth-child(9){
+			background: url("img/bg4.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+		.slide ul li:nth-child(10){
+			background: url("img/bg5.jpg") no-repeat ;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+	</style>
+</head>
+<body>
+	<div class="slide">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>please enter your title</title>
+	<meta charset="utf-8">
+	<meta name="Author" content="潭州学院-阿飞老师">
+	<style type='text/css'>
+	*{ margin:0; padding:0;}
+	#box{
+		width:500px;
+		height:360px;
+		margin:100px auto;
+		position:relative;
+	}
+	#pic{
+		width:500px;
+		height:360px;
+		position:relative;
+	}
+	#pic img{
+		position:absolute;/*元素在盒子中按层堆叠，最后一张再最前面。用绝对定位一定是设置给子元素，这里div#pic下的img,若用ul>li则是给li下面的img设置position: absolute;*/
+		top:0;
+		left:0;
+		display:none;
+	}
+	#btn a{
+		position:absolute;	/*元素在盒子中按层堆叠，最后一张再最前面。用绝对定位一定是设置给子元素，这里div#pic下的img,若用ul>li则是给li下面的img设置position: absolute;*/
+		top:50%;
+		margin-top:-25px;
+		width:30px;
+		height:50px;
+		background:#999;
+		cursor:pointer;
+		font-size:20px;
+		color:#fff;
+		font-weight:bold;
+		text-align:center;
+		line-height:50px;
+	}
+	#left{
+		left:0;
+	}
+	#right{
+		right:0;
+	}
+	</style>
+</head>
+<body>
+<div id="box">
+	<div id="pic">
+		<img src="js-zuoye-img/1.jpg" alt=""/>
+		<img src="js-zuoye-img/2.jpg" alt=""/>
+		<img src="js-zuoye-img/3.jpg" alt=""/>
+		<img src="js-zuoye-img/4.jpg" alt=""/>
+		<img src="js-zuoye-img/5.jpg" alt=""/>
+	</div>
+	<div id="btn">
+	    <a href="#" id="left" >&lt;</a> 	<!-- 如果这里用的是a标签，那么href="#" 引号之间一定要写“#”,否则在点击时候不会跳转到下一张 -->
+		<a href="#" id="right" >&gt;</a>
+	</div>
+</div>
+<script type="text/javascript">
+	var oPic = document.getElementById('pic');
+	var oImg = oPic.getElementsByTagName('img');
+	var oLeft = document.getElementById('left');
+	var oRight = document.getElementById('right');
+	var n = 0;
+	oImg[0].style.display = 'block';
+	oRight.onclick = function(){
+        oImg[n].style.display = 'none';
+    	n++;
+		if(n>=oImg.length){
+			n=0;
+		}
+        oImg[n].style.display = 'block';
+	};
+	oLeft.onclick=function(){
+        oImg[n].style.display = 'none';
+		n--;
+		if(n<0){
+			n=oImg.length-1;
+		}
+        oImg[n].style.display = 'block';
+	}
+
+
+</script>
+</body>
+</html>
+<!-- <!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="utf-8">
+		<meta name="Author" content="潭州学院-阿飞老师">
+		<style type='text/css'>
+
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="pic">
+				<img src="img/1.jpg" alt="" />
+				<img src="img/2.jpg" alt="" />
+				<img src="img/3.jpg" alt="" />
+				<img src="img/4.jpg" alt="" />
+				<img src="img/5.jpg" alt="" />
+			</div>
+			<div id="btn">
+				<div id="left">&lt;</div>
+				<div id="right">&gt;</div>
+			</div>
+		</div>
+
+	</body>
+</html> -->

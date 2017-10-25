@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		ul{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+		#box{
+			position:relative;
+			width:500px;
+			height:360px;
+			margin:50px auto;
+			overflow: hidden;
+		}
+		#pic{
+			position:relative;
+			display: block;
+			width:500px;
+			height:360px;
+		}
+		#oic a{
+			width:500px;
+			height:360px;
+		}
+		#pic a img{
+			position: absolute;
+			width:500px;
+			height:360px;
+			top:0;
+			left:0;
+			display: none;
+		}
+		#tab{
+			position: absolute;
+			width:100px;
+			height:12px;
+			bottom:10px;
+			left:50%;
+			margin-left:-45px;
+		}
+		#tab ul li{
+			width:12px;
+			height:12px;
+			background-color:#ccc;
+			border-radius: 50%;
+			float: left;
+			margin-left:8px;
+		}
+		.clearfix:before,
+		.clearfix:after{
+			content:"";
+			display: table;
+		}
+		.clearfix:after{clear: both;}
+		.arrow a{
+			position: absolute;
+			width:50px;
+			height:80px;
+			line-height:80px;
+			display: block;
+			top:50%;
+			margin-top:-40px;
+			background: rgba(100,100,100,.7);
+			z-index:1;
+			text-align: center;
+			color:#fff;
+			font-size:40px;
+		}
+		#left{
+			left:5px;
+		}
+		#right{
+			right:5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="pic">
+			<a href=""><img src="js-zuoye-img/1.jpg" alt=""></a>
+			<a href=""><img src="js-zuoye-img/2.jpg" alt=""></a>
+			<a href=""><img src="js-zuoye-img/3.jpg" alt=""></a>
+			<a href=""><img src="js-zuoye-img/4.jpg" alt=""></a>
+			<a href=""><img src="js-zuoye-img/5.jpg" alt=""></a>
+		</div>
+		<div id="tab">
+			<ul class="clearfix">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="arrow">
+			<a href="#" id="left">&lt;</a>
+			<a href="#" id="right">&gt;</a>
+		</div>
+	</div>
+	<script>
+        var oPic = document.getElementById("pic");
+		var oImg = oPic.getElementsByTagName("img");
+		var oRight = document.getElementById("right");
+		var oLeft = document.getElementById("left");
+		var n = 0;
+		
+        var oTab = document.getElementById("tab");
+        var oTabLi = oTab.getElementsByTagName("li");
+        oImg[0].style.display = "block";
+        oTabLi[0].style.background = "#f60";
+		oRight.onclick = function(){
+            //oImg[n].style.display = "none";
+             var left=0;
+             var lastN = n
+
+            var timer = setInterval(function(){
+			     left=left-20;
+			     if(left<= -500){
+			         left=-500;
+			         clearInterval(timer);
+			     }
+			     oImg[lastN].style.left = left+'px';
+			},13);
+            oTabLi[n].style.background = "#ccc";
+            n++;
+            if (n>=oImg.length){n=0;}
+            oImg[n].style.display = "block";
+            oImg[n].style.left = "500px";
+            var left1=500;
+            var timer1 = setInterval(function(){
+                left1-=20;
+                if(left1<=0){
+                   left1=0;
+                    clearInterval(timer1);
+               }
+                oImg[n].style.left = left1+'px';
+           },13);
+            oTabLi[n].style.background = "#f60";
+		}
+        oLeft.onclick = function(){
+//          oImg[n].style.display = "none";
+	        var left = 0;
+	        var nextN = n;
+	        var timer = setInterval(function(){
+	            left+=10;
+	            if(left>=500){
+                    left=500;
+                    clearInterval(timer);
+	            }
+	            oImg[nextN].style.left = left+'px';
+            },13);
+            oTabLi[n].style.background = "#ccc";
+            n--;
+            if (n<0){n=oImg.length-1;}
+            oImg[n].style.display = "block";
+            oImg[n].style.display = "-500px";
+            var left3 = -500;
+            var timer3 = setInterval(function(){
+                  left3+=10;
+                if(left3>=0){
+                    left3=0;
+                    clearInterval(timer3);
+                }
+                oImg[n].style.left = left3+'px';
+                console.log("b:"+left);
+           },13);
+            oTabLi[n].style.background = "#f60";
+        }
+        
+        for( var i = 0; i < oImg.length; i++){
+            oTabLi[i].index=i;
+           
+            oTabLi[i].onclick = function(){
+                oTabLi[n].style.background = "#ccc";
+                oImg[n].style.display = "none";
+              n= this.index; //  n是一个全局的，点击哪个n 变成 哪个，不在循环里写n=i是因为
+//	            循环瞬间执行完毕，点击时n已经为5；
+                 oTabLi[this.index].style.background = "#f60";
+                oImg[n].style.display = "block";
+                oImg[n].style.left = "0px";
+            }
+        }
+        
+        
+        
+	</script>
+</body>
+</html>0

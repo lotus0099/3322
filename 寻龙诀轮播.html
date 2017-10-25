@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		html,body{
+			width:100%;
+			height:100%;
+		}
+		
+		.wrap{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+		}
+		.swiper-wrapper{
+			width:100%;
+			height:100%;
+			display: flex;
+			transform:translate(0px);
+			transition:1s;
+			/*animation: mov 15s infinite;*/
+		}
+		.swiper-slide{
+			width:100%;
+			height:100%;
+			flex-shrink:0;
+		}
+		.swiper-wrapper .slide-bg{
+			width:100%;
+			height:100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="swiper-wrapper" )>
+			<div class="swiper-slide">
+				<img class="slide-bg" src="http://weiyinyue.music.sina.com.cn/ghouls_resource/img/stage/01.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img class="slide-bg" src="http://weiyinyue.music.sina.com.cn/ghouls_resource/img/stage/02.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img class="slide-bg" src="http://weiyinyue.music.sina.com.cn/ghouls_resource/img/stage/03.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img class="slide-bg" src="http://weiyinyue.music.sina.com.cn/ghouls_resource/img/stage/04.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img class="slide-bg" src="http://weiyinyue.music.sina.com.cn/ghouls_resource/img/stage/05.jpg">
+			</div>
+		</div>
+	</div>
+	<script>
+		
+		var oDiv = document.getElementsByClassName("swiper-wrapper")[0];
+		var _width = oDiv.offsetWidth;
+		var n = 0;
+		window.onresize = function(){
+		    _width = oDiv.offsetWidth;
+		}
+		setInterval(function(){
+		    n++;
+		    n%=5;
+            oDiv.style.transform = "translate("+(-n*_width)+"px)";
+		},1000);
+	</script>
+</body>
+</html>

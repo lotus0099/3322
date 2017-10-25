@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script >
+    window.onload = function(){
+        Game.exe();
+    }
+    var Game = {
+        exe: function(){
+            this.init();
+        },
+        init: function(){
+            document.body.style.background = "black";
+            var oDiv = document.createElement("div");
+            oDiv.style.cssText = "width:300px;height:500px;border:10px solid #fff;margin:50px auto;text-align:center;position:relative;";
+            document.body.appendChild(oDiv);
+            var oH = document.createElement("h1");
+            oH.innerHTML = "飞机大战 1.0";
+            oH.style.cssText = "color:#fff;font-size:26px;font-weight:normal;padding-top:50px;";
+            oDiv.appendChild(oH);
+
+            for(var i=0;i<4;i++){
+                var oP = document.createElement("p");
+                oP.style.cssText = "font-size:14px;color:#000;width:150px;height:40px;margin:50px auto;text-align:center;line-height:40px;background:#fff;cursor:pointer";
+                oP.innerHTML = "";
+                var html = "";
+                oP.index = i;
+                oP.onmouseenter = function(){
+                    this.style.background = '#f60';
+                    this.style.color = '#fff';
+                };
+                oP.onmouseleave = function(){
+                    this.style.background = '#fff';
+                    this.style.color = '#000';
+                };
+                oP.onclick = function(e){
+                    e=e||window.event;
+                    Game.start(this.index,oDiv,e);
+                }
+                switch (i){
+                    case 0:
+                        html="简单难度";
+                        break;
+                    case 1:
+                        html="中等难度";
+                        break;
+                    case 2:
+                        html='复杂难度';
+                        break;
+                    case 3:
+                    	html = '飞哥附体';
+                    	oP.style.color = '#f00';
+                        oP.style.fontWeight = 'bold';
+                    	oP.onmouseenter = function(){
+                            this.style.background = '#f60';
+                        };
+                        oP.onmouseleave = function(){
+                            this.style.background = '#fff';
+                        };
+                    	break;
+                }
+                oP.innerHTML = html;
+                oDiv.appendChild(oP);
+
+            }
+        },
+        //开始游戏
+        start:function(index,oGameBox,e){
+         //传参相当于这个   var oGameBox = oDiv;//对象的等号是引用的关系;
+           oGameBox.innerHTML = "";
+           this.plane(oGameBox,e);
+           this.enemy(oGameBox);
+        },
+        //关于飞机
+        plane:function(oGameBox,e){
+            //var oGameBox = oGameBox;
+//            e=e||event;
+            var oPlane = document.createElement("img");  //new Image();
+            var x=e.pageX;
+            var y=e.pageY;
+            oPlane.src = "img/plane.png";
+            oPlane.width = 60;
+            oPlane.height = 36;
+            var tY =oGameBox.offsetTop+10+oPlane.height/2;
+            var lX = oGameBox.offsetLeft+10+oPlane.width/2;
+            window.onresize = function(){
+                 lX = oGameBox.offsetLeft+10+oPlane.width/2;
+            }
+            oPlane.style.cssText='position:absolute;top:'+(y-tY)+'px;left:'+(x-lX)+'px;';
+            oGameBox.appendChild(oPlane);
+            var leftMin = -oPlane.width/2;
+            var leftMax = oGameBox.clientWidth-oPlane.width/2;
+            var topMin = 0;
+            var topMax = oGameBox.clientHeight-oPlane.height;
+            document.onmousemove = function(e){
+                e = e||event;
+                var top = e.pageY-tY;
+                var left = e.pageX-lX;
+                top = Math.min(top,topMax);
+                top = Math.max(top,topMin);
+                left = Math.min(left,leftMax);
+                left = Math.max(left,leftMin);
+                oPlane.style.left = left+'px';
+                oPlane.style.top = top+'px';
+            }
+             this.biubiubiu(oPlane,oGameBox);
+        },
+        //子弹
+       biubiubiu:function(oPlane,oGameBox){
+           var timer = setInterval(function(){    //产生子弹的定时器;
+                var oBiu = new Image();
+                oBiu.src = 'img/bullet.png';
+                oBiu.width=6;
+                oBiu.height=22;
+                oBiu.className = 'biubiubiu';
+                var biuLeft=oPlane.offsetLeft+oPlane.width/2-oBiu.width/2;
+                var biuTop = oPlane.offsetTop-oBiu.height+3;
+                oBiu.style.cssText='position:absolute;top:'+biuTop+'px;left:'+biuLeft+'px;';  //一定是单引号
+                oGameBox.appendChild(oBiu);
+                oBiu.timer = setInterval(function(){    //子弹上升的定时器
+                    if(!oBiu.parentNode){
+                        clearInterval(oBiu.timer);
+                    }
+                    oBiu.style.top = oBiu.offsetTop-10+'px';
+                    if(oBiu.offsetTop<-oBiu.height){
+                        clearInterval(oBiu.timer);
+                        oBiu.parentNode.removeChild(oBiu);
+                    }
+                },13)
+           },100);
+
+       },
+        //关于敌军
+        enemy:function(oGameBox){
+             var timer = setInterval(function(){
+                var oEnemy = new Image();
+                oEnemy.src = "img/enemy.png";
+                oEnemy.width=23;
+                oEnemy.height=30;
+                var lMin = -oEnemy.width/2;
+                var lMax = oGameBox.clientWidth-oEnemy.width;
+                var oEnemyLeft = Math.random()*(lMax-lMin)+lMin;
+                oEnemy.style.cssText='position:absolute;top:'+(-oEnemy.height)+'px;left:'+oEnemyLeft+'px;';
+                oGameBox.appendChild(oEnemy);
+                var a = Math.random()*4+1;
+                oEnemy.timer = setInterval(function(){
+                      oEnemy.style.top = oEnemy.offsetTop+a+'px';
+                       if(oEnemy.offsetTop>=oGameBox.clientHeight){
+                          clearInterval(oEnemy.timer);
+                          oEnemy.parentNode.removeChild(oEnemy);
+                       }
+                },13);
+                //和子弹的碰撞检测
+                var allBiu = document.getElementsByClassName("biubiubiu");
+                oEnemy.pzBiu = setInterval(function(){
+                      for(var i=0;i<allBiu.length;i++){
+                          if(Game.boom(oEnemy,allBiu[i])){
+                               oEnemy.src = "img/boom.png";
+                               setTimeout(function(){
+                                   	if ( oEnemy.parentNode )
+                                    {
+                                        oEnemy.parentNode.removeChild( oEnemy );
+                                    }
+                               },300)
+                               clearInterval(oEnemy.pzBiu);
+                               allBiu[i].parentNode.removeChild(allBiu[i]);
+                          };
+
+                      };
+                },50);
+              oEnemy.pzPlane = setInterval(function(){
+                        clearInterval(oEnemy.pzBiu);
+                         if(Game.boom(oEnemy,oPlane){ 
+                     }
+              },13)
+             },500);
+        },
+        //碰撞检测
+        boom:function(obj1,obj2){
+            var T1 = obj1.offsetTop;
+            var B1 = T1+obj1.clientHeight;
+            var L1 = obj1.offsetLeft;
+            var R1 = L1+obj1.clientWidth;
+            var T2 = obj2.offsetTop;
+            var B2 = T2+obj2.clientHeight;
+            var L2 = obj2.offsetLeft;
+            var R2 = L2+obj2.clientWidth;
+            if(R2<L1||L2>R1||B2<T1||T2>B1){
+               return false;
+            }else{
+                return true;
+            }
+        },
+
+
+
+
+    }
+</script>
+</body>
+</html>

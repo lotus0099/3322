@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		.box{
+			position: relative;
+			width:1200px;
+			margin: 50px auto;
+			border:1px solid #f00;
+			overflow: hidden;
+		}
+		input[type="radio"]{
+			display: none;
+		}
+		label{
+			display: block;
+			float: left;
+			margin-left: 26px;
+			margin-top:690px;
+			border:5px solid #cec;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		label img{
+			display: block;
+			width:200px;
+			height:126px;
+		}
+		.box>img{
+			position: absolute;
+			top:0;
+			left:0;
+			width:1200px;
+			height:653px;
+			display: none;
+			border:10px solid #fff;
+			box-sizing: border-box;
+			opacity:0;
+			transition: opacity 500ms;
+		}
+		.box>p{
+			position: absolute;
+			top:645px;
+			left:0;
+			width:0;
+			z-index:999;
+			height:5px;
+			background: #66ff66;
+			opacity:0;
+			transition: width 3s linear;
+		}
+		:checked + label{
+			margin-top:665px;
+		}
+		
+		:checked + label +img{
+			opacity:1;
+			display: block;
+		}
+		:checked + label + img + p{
+			opacity:1;
+			width:1200px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<input type="radio" name="img" id="img1" checked><!--dsf-->
+		<label for="img1" ><img src="img/bg1.jpg" ></label>
+		<img src="img/bg1.jpg" class="on">
+		<p></p>
+		<input type="radio" name="img" id="img2">
+		<label for="img2" ><img src="img/bg2.jpg" ></label>
+		<img src="img/bg2.jpg" >
+		<p></p>
+		<input type="radio" name="img" id="img3">
+		<label for="img3"><img src="img/bg3.jpg" ></label>
+		<img src="img/bg3.jpg" >
+		<p></p>
+		<input type="radio" name="img" id="img4">
+		<label for="img4"><img src="img/bg4.jpg" ></label>
+		<img src="img/bg4.jpg" >
+		<p></p>
+		<input type="radio" name="img" id="img5">
+		<label for="img5"><img src="img/bg5.jpg" ></label>
+		<img src="img/bg5.jpg" >
+		<p></p>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+             <title>Document</title>
+             <style>
+             *{
+             padding:0;
+             margin:0;
+             }
+              #box{
+              width:100px;
+              height:100px;
+              background:red;
+              position:absolute;
+              top:0;
+              left:0;
+              }
+
+</style>
+</head>
+<body>
+       <div id="box"></div>
+       <script >
+       var oBox = document.getElementById("box");
+       oBox.onmousedown = function(ev){
+           console.log("按下");
+           ev = ev||event;                //不同事件有不同的事件对象ev
+           var x = ev.clientX;
+           var y = ev.clientY;
+
+           var wrapX=  oBox.offsetLeft;
+           var wrapY = oBox.offsetTop;
+           var a = this;
+             document.onmousemove = function(ev){
+                     console.log("移动");
+                     ev = ev||event;
+                     var bx_=ev.clientX-x;
+                     var by_ = ev.clientY-y;
+                     a.style.left=wrapX+bx_+'px';
+                     a.style.top =wrapY+by_+'px';
+             }
+             document.onmouseup = function(){
+                   console.log("抬起");
+                    this.onmousemove = null;
+             }
+       }
+</script>
+</body>
+</html>

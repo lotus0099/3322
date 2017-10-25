@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        li{
+            list-style:none;
+        }
+        a{
+            text-decoration:none;
+        }
+        .clearfix::before,
+        .clearfix:after{
+            display: table;
+            content:"";
+        }
+        .clearfix:after{
+            clear:both;
+        }
+        #banner{
+            position: relative;
+            width:520px;
+            height:280px;
+            margin:50px auto;
+            border:1px solid  red;
+            overflow: hidden;
+        }
+        .inner-banner{
+            position: absolute;
+            width:1000%;
+            height:280px;
+            margin-left: -520px;
+        }
+        .inner-banner  a{
+            display: block;
+            float: left;
+            width:520px;
+            height:280px;
+        }
+        .inner-banner a img{
+
+             /*vertical-align: top;*/
+            /*display: none;*/
+        }
+        .tab {
+            position: absolute;
+            left:50%;
+            bottom:10px;
+            width:70px;
+            height:14px;
+            margin-left: -35px;
+            background:rgba(210,210,210,.6);
+            border-radius: 8px;
+            font-size: 0;  /*子元素用的inline-block-去除间距;*/
+        }
+        .tab ul li{
+            width:10px;
+            height:10px;
+            display: inline-block;
+            border-radius:50%;
+            background: rgba(17,17,27,0.6);
+            box-shadow:0 0 1px rgba(255,255,255,0.9) inset;
+            cursor: pointer;
+            margin: 2px;
+        }
+        .tab ul li.on{
+            box-shadow:0 0 0 1px rgba(17,17,27,0.4) inset;
+            background: #fff;
+        }
+        .arrow a{
+            position: absolute;
+            top:50%;
+            width:30px;
+            height:40px;
+            margin-top:-20px;
+            background: rgba(115,115,115,.7);
+            color:#fff;
+            font-size: 20px;
+            line-height:40px;
+            text-align: center;
+        }
+        #prev{
+            left:0;
+            color:#fff;
+        }
+        #next{
+            right:0;
+            color:#fff;
+        }
+</style>
+</head>
+<body>
+    <div id="banner">
+    		<div class="inner-banner clearfix" id="inner-banner">
+                <a href="#"><img src="js-天猫轮播作业-img/5.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/1.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/2.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/3.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/4.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/5.jpg" alt=""></a>
+    			<a href="#"><img src="js-天猫轮播作业-img/1.jpg" alt=""></a>
+    		</div>
+    		<div class="tab">
+    			<ul>
+    				<li class="on"></li>
+    				<li></li>
+    				<li></li>
+    				<li></li>
+    				<li></li>
+    			</ul>
+    		</div>
+    		<div class="arrow">
+    			<a href="#" id="prev">&lt;</a>
+    			<a href="#" id="next">&gt;</a>
+    		</div>
+    	</div>
+    	<script src="move.js"></script>
+    	<script>
+    	     var oBanner = document.getElementById('banner');
+            var oInnerBanner = document.getElementById('inner-banner');
+            var oImg = oInnerBanner.getElementsByTagName("img");
+            var oLi = document.getElementsByTagName("li");
+            var oPrev = document.getElementById("prev");
+            var oNext = document.getElementById("next");
+            var n = 0;
+            var timer;
+            var nowTime = 0;
+            oNext.onclick = function(){
+                if(new Date()-nowTime>300){
+                     nowTime = new Date();
+                     oLi[n].style.background = "#000";
+                     n++;
+                        if(n>=oImg.length){
+                          n=0;
+                        }
+                     change();
+                }
+            };
+            oPrev.onclick = function(){
+                if(new Date()-nowTime>300){
+                    nowTime = new Date();
+                    oLi[n].style.background = "#000";
+                    if(n<0){
+                        n=oLi.length-1;
+                    };
+                    n--;
+                    //n = n<0?oLi.length-1:n--;这里将n--写在判断语句后,
+                    change();
+                    };
+                }
+
+            for(var i=0;i<oLi.length;i++){
+                oLi[i].index = i;
+                oLi[i].onclick = function(){
+                     oLi[n].style.background = "#000";
+                     n = this.index;
+                     change();
+                }
+            }
+            auto();
+            oBanner.onmouseover = function(){
+
+                clearInterval(timer);
+            }
+            oBanner.onmouseout = function(){
+                 auto();
+            };
+            function auto(){
+                timer = setInterval(function(){
+                    oLi[n].style.background = "#000";
+                    n++;
+                        if(n>=oImg.length) n=0;
+                    change();
+                },1000);
+            }
+            function change(){
+                var now = n;//执行此函数时候,图片已经是最后一张,n=5,需要圆点回到n=0,所以新增一个now存放
+                if(now>=oLi.length){
+                    now = 0;
+                }
+                if(now<0){
+                    now = oLi.length-1;
+                }
+                 oLi[now].style.background = "#fff";
+                 move(oInnerBanner,{marginLeft:-520*(n+1)+'px'},300,function() {
+                   if(n==5){
+                       this.style.marginLeft = "-520px";
+                       n=now;
+                   }else if(n==-1){
+                       this.style.marginLeft = -520*(oLi.length)+'px';
+                       n = now;
+                   }
+                 });
+            }
+        </script>
+</body>
+</html>

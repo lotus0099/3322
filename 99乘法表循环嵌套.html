@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0;
+		    margin:0;
+		}
+		table{
+			border-collapse:collapse;
+		}
+		td{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<script>
+	//60°角在左上的直角三角形，30°角在右下；
+	document.write("<table width='600px' border=1 >");
+    for(var i = 1;i<=9;i++){
+        document.write("<tr>");
+        for(var j = 1;j<=i;j++){
+           //(j+"*"+i+"="+(i*j)+"<br>");
+	        document.write("<td>"+j+"*"+i+"="+i*j+"</td>");
+        }
+        document.write("</tr>");
+	}
+    document.write("</table>");
+//	30°角在右上的直角三角形，60°角在左下；
+//	for(var i=9;i>0;i--){
+//	    for(var j=1;j<=i;j++){
+//            document.write(j+"*"+i+"="+i*j+"&nbsp;");
+//	    }
+//        document.write("<br>");
+//	}
+// 直角在右下角
+//	document.write("<table width='600px' border=1 >");
+//	for(var i=1;i<=9;i++){
+//        document.write("<tr>");
+//	    for(var n=i;n<9;n++){
+//            document.write("<td>&nbsp;</td>");
+//	    }
+//
+//	    for(var j=i;j>0;j--){
+//
+//            document.write("<td>"+j+"*"+i+"="+i*j+"</td>");
+//	    }
+//        document.write("</tr>");
+//
+//	}
+	
+</script>
+</body>
+</html>

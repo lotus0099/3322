@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding:0px;
+			margin:0px;
+		}
+		body{
+			background: #9efeea;
+		}
+		.ghost{
+			position: relative;
+			top:0;
+			left:0;
+			width:120px;
+			height:160px;
+			margin:100px auto;
+			-webkit-animation: pop 1s infinite linear alternate;
+			-o-animation: pop 1s infinite linear alternate;
+			animation: pop 1s infinite linear alternate;
+		}
+		@keyframes pop{
+			to{
+			top:100px;
+		    }
+		}
+		.ghostbody{
+			width:120px;
+			height:160px;
+			background:#fff;
+			-webkit-border-radius: 50% 50% 0 0;
+			-moz-border-radius: 50% 50% 0 0;
+			border-radius: 50% 50% 0 0;
+		}
+		.ghosteye{
+			position: absolute;
+			width:18px;
+			height:25px;
+			background:#000;
+			border:1px solid #000;
+			border-radius:50%;
+			box-shadow:inset -2px -2px #fff;
+		}
+		.left{
+			top:65px;
+			left:28px;
+		}
+		.right{
+			top:65px;
+			right:28px;
+		}
+		.ghostnose{
+			position: absolute;
+			top:100px;
+			left:55px;
+			width:16px;
+			height:22px;
+			border:2px solid #000;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+		}
+		.ghostfooter{
+			width:120px;
+			height:20px;
+			background-image: radial-gradient(circle at 50% 0,#fff 70%,transparent 70% );
+			-webkit-background-size: 24px 20px;
+			background-size: 24px 20px;
+		}
+		.shadow {
+			position: absolute;
+			width: 130px;
+			height: 30px;
+			margin-top: 100px;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			background: rgb(153, 188, 255);
+			-webkit-animation: shadow 1s infinite linear alternate;
+			-o-animation: shadow 1s infinite linear alternate;
+			animation: shadow 1s infinite linear alternate;
+		}
+		@keyframes shadow{
+			0% {
+			margin-top: 100px;
+			background: rgb(196, 243, 255);
+			}
+		    100%{
+			margin-top: 0px;
+			background: rgb(64, 95, 156);
+		    }
+		}
+	</style>
+</head>
+<body>
+	<div class="ghost">
+		<div class="ghostbody"></div>
+		<div class="ghosteye left"></div>
+		<div class="ghosteye right"></div>
+		<div class="ghostnose"></div>
+		<div class="ghostfooter"></div>
+		<div class="shadow"></div>
+	</div>
+</body>
+</html>

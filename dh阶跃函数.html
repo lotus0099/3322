@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		.box{
+			width:273px;
+			height:273px;
+			background: url("img/3.jpg");
+			animation: mov 1s  steps(30) infinite;
+		}
+		@keyframes mov{
+			0% {
+				background-position: 0 0;
+			}
+			100%{
+				background-position: -3000%  0;
+			}
+		}
+		.box2{
+			width:176px;
+			height:250px;
+			background:url("img/1.jpg");
+			animation: step2 2s steps(4) infinite;
+		}
+		@keyframes step2{
+			0%{
+				background-position:0 0;
+			}
+			100%{
+				background-position:-400% 0;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box2"></div>
+	
+</body>
+</html>

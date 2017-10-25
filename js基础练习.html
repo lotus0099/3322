@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+	
+		.box{
+			width:200px;
+			height:200px;
+			background:blue;
+		}
+		#btn{
+			width:50px;
+			height: 30px;
+			line-height:30px;
+			background: #ccc;
+			text-align:center;
+		}
+		.wrap{
+			position: fixed; //遮罩层
+			top:0;
+			left:0;
+			background:rgba(51,51,51,.7);
+			width:100%;
+			height:100%;
+			display: none;
+		}
+		.wrap #center{
+			position: absolute;
+			left:50%;
+			top:50%;
+			margin-left:-150px;
+			margin-top:-100px;
+			width:300px;
+			background: #4cffaf;
+		}
+		#center .item{
+			height:50px;
+			width:250px;
+			line-height:50px;
+			margin:10px auto;
+		}
+		.item .tit,.len,.color{
+			display: inline-block;
+			margin-left: 10px;
+		}
+		.wrap .item .color{
+			width:45px;
+			height:28px;
+			line-height:28px;
+		}
+		.button{
+			width:50px;
+			height:20px;
+			line-height:20px;
+			text-align:center;
+			background: #eee;
+			margin:10px auto;
+		}
+		.item .len:hover{
+			cursor: pointer;
+			color:#FFD88F;
+		}
+		
+	</style>
+</head>
+<body>
+		<div class="box" id="box"></div>
+		<div id="btn">click</div>
+		<div class="wrap" id="wrap">
+			<div  id="center">
+			<div class="item">
+				<font class="tit">背景：</font>
+				<span class="color" style="background: #f00;"></span>
+				<span class="color" style="background: #0f0;"></span>
+				<span class="color" style="background: #00f;"></span>
+			</div>
+			<div class="item">
+				<font class="tit">宽度：</font>
+				<span class="len">100px</span>
+				<span class="len">200px</span>
+				<span class="len">300px</span>
+			</div>
+			<div class="item">
+				<font class="tit">高度：</font>
+				<span class="len">100px</span>
+				<span class="len">200px</span>
+				<span class="len">300px</span>
+			</div>
+			<div class="button" id="button">点击</div>
+		</div>
+	</div>
+	<script>
+        var oBtn = document.getElementById("btn");
+        var oWrap = document.getElementById("wrap");
+        var oBox = document.getElementById("box");
+        var oSpan = document.getElementsByTagName("span");
+        var obutton = document.getElementById("button");
+		oBtn.onclick = function(){
+            oWrap.style.display = "block";
+		}
+        obutton.onclick = function(){
+            oWrap.style.display = "none";
+        }
+        for(var i = 0;i<3; i++) {
+            oSpan[i].onclick = s1;
+            oSpan[i+3].onclick = s2;
+            oSpan[i+6].onclick = s3;
+        }
+        function s1(){
+            oBox.style.background = this.style.background;
+        }
+        function s2(){
+            oBox.style.width = this.innerHTML;
+        }
+        function s3(){
+            oBox.style.height = this.innerHTML;
+        }
+	</script>
+</body>
+</html>
